@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 
 //Instruments
 
+import { Consumer } from 'components/HOC/withProfile';
+
+
 
 import Styles from "./styles.m.css";
 
@@ -11,15 +14,21 @@ export default class Composer extends Component{
         const { avatar, currentUserFirstName } = this.props;
 
         return (
-            <section className = { Styles.composer }>
-                <img src = { avatar } />
-                <form>
-                    <textarea 
-                        placeholder = {`What's on your ming, ${
-                        currentUserFirstName} ?`} />
-                    <input type = 'submit' value = 'Post' />
-                </form>
-            </section>
+            <Consumer>
+            {(context) => (
+                <section className = { Styles.composer }>
+                    <img src = { context.avatar } />
+                    <form>
+                        <textarea 
+                            placeholder = {`What's on your ming, ${
+                                context.currentUserFirstName} ?`} />
+                        <input type = 'submit' value = 'Post' />
+                    </form>
+                </section>
+            )}
+        </Consumer>
+
+           
         )
     }
 }
